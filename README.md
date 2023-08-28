@@ -8,5 +8,5 @@
 <a href="https://docs.google.com/document/d/1GfRfbH4m6urw4LkrJP4Lrvc2tSu4vreS0WkPHMHcwPE/edit?usp=sharing">Esquema de Atributos</a>
 <br>
 <br>
-<img src='MySQL/DER_image.png' style="float:;"></img>
+<img src='MySQL/DER_image.png' ></img>
 </div>
