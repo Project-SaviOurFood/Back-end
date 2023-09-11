@@ -30,15 +30,15 @@ public class Category {
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "category", cascade = CascadeType.REMOVE)
 	@JsonIgnoreProperties("category")
-	private List<Product> products;
+	private List<Product> product;
 
 
 	public List<Product> getProduct() {
-		return products;
+		return product;
 	}
 
 	public void setProduct(List<Product> product) {
-		this.products = product;
+		this.product = product;
 	}
 
 	public Long getId() {
