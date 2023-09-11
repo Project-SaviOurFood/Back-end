@@ -1,4 +1,4 @@
-package com.generation.SaviOurFood.Controller;
+package com.generation.SaviOurFood.controller;
 
 import java.util.List;
 
@@ -8,15 +8,11 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.generation.SaviOurFood.Model.User;
-import com.generation.SaviOurFood.Repository.UserRepository;
-
-import jakarta.validation.Valid;
+import com.generation.SaviOurFood.model.User;
+import com.generation.SaviOurFood.repository.UserRepository;
 
 @RestController
 @RequestMapping("/user")
@@ -49,8 +45,8 @@ public class UserController {
 		if (userRepository.existsById(user.getTema().getId()))
 			return ResponseEntity.status(HttpStatus.CREATED)
 					.body(userRepository.save(user));
-		*/
-    }
+
+    } */
     /*  @PutMapping
       public ResponseEntity<User>put(@Valid @RequestBody User user){
     	  if (userRepository.existsById(user.getId())) {
@@ -60,8 +56,8 @@ public class UserController {
     		  throw new ResponseStatusException(HttpStatus.BAD_REQUEST,"Tema não existe!",null);
     	  }
     	  return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
-    	  */
-     }
+
+     }*/
      
      /*
      @ResponseStatus(HttpStatus.NO_CONTENT)

@@ -1,4 +1,4 @@
-package com.generation.SaviOurFood.Model;
+package com.generation.SaviOurFood.model;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
