@@ -21,15 +21,15 @@ public class Product {
   private Float value;
 
   @NotNull(message = "The attribute date is mandatory")
-  private Date expirationDate;
+  private String expirationDate;
 
   private String picture;
 
   @ManyToOne
-  @JsonIgnoreProperties("Product")
+  @JsonIgnoreProperties("product")
   private Category category;
   @ManyToOne
-  @JsonIgnoreProperties("Product")
+  @JsonIgnoreProperties("product")
   private User user;
 
   public Long getId() {
@@ -56,11 +56,11 @@ public class Product {
     this.value = value;
   }
 
-  public Date getExpirationDate() {
+  public String getExpirationDate() {
     return expirationDate;
   }
 
-  public void setExpirationDate(Date expirationDate) {
+  public void setExpirationDate(String expirationDate) {
     this.expirationDate = expirationDate;
   }
 

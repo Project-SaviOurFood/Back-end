@@ -35,9 +35,8 @@ public class ProductController {
     @Autowired
     private CategoryRepository categoryRepository;
 
-    @GetMapping("/all")
+    @GetMapping
     public ResponseEntity<List<Product>> getAll(){
-
         return ResponseEntity.ok(productRepository.findAll());
     }
 
@@ -50,7 +49,7 @@ public class ProductController {
 
     }
 
-    @GetMapping("/{name}")
+    @GetMapping("/name/{name}")
     public ResponseEntity<List<Product>> getByAllName(@PathVariable String name){
 
         return ResponseEntity.ok(productRepository.findAllByNameContainingIgnoreCase(name));
@@ -62,9 +61,9 @@ public class ProductController {
             if (categoryRepository.existsById(product.getCategory().getId())) {
                 return ResponseEntity.status(HttpStatus.CREATED).body(productRepository.save(product));
             }
-            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Category not found!!");
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Category not found!!", null);
         }
-        throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Ueer not found!!");
+        throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Ueer not found!!", null);
     }
 
     @PutMapping
@@ -74,7 +73,7 @@ public class ProductController {
                 .map(resposta -> ResponseEntity.ok(productRepository.save(product)))
                 .orElse(ResponseEntity.status(HttpStatus.NOT_FOUND).build());
         }
-        throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Product not found!!");
+        throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Product not found!!", null);
     }
 
     @ResponseStatus(HttpStatus.NO_CONTENT)
