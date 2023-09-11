@@ -2,7 +2,9 @@ package com.generation.SaviOurFood.controller;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.generation.SaviOurFood.model.Product;
+import com.generation.SaviOurFood.repository.CategoryRepository;
 import com.generation.SaviOurFood.repository.ProductRepository;
+import com.generation.SaviOurFood.repository.UserRepository;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -28,6 +30,10 @@ public class ProductController {
 
     @Autowired
     private ProductRepository productRepository;
+    @Autowired
+    private UserRepository userRepository;
+    @Autowired
+    private CategoryRepository categoryRepository;
 
     @GetMapping("/all")
     public ResponseEntity<List<Product>> getAll(){
@@ -39,7 +45,7 @@ public class ProductController {
     public ResponseEntity<Product> getById(@PathVariable Long id){
 
         return productRepository.findById(id)
-                .map(resposta -> ResponseEntity.ok(resposta))
+                .map(ResponseEntity::ok)
                 .orElse(ResponseEntity.status(HttpStatus.NOT_FOUND).build());
 
     }
@@ -47,21 +53,28 @@ public class ProductController {
     @GetMapping("/{name}")
     public ResponseEntity<List<Product>> getByAllName(@PathVariable String name){
 
-        return ResponseEntity.ok(productRepository.findAllByProductContainingIgnoreCase(name));
+        return ResponseEntity.ok(productRepository.findAllByNameContainingIgnoreCase(name));
     }
 
     @PostMapping
     public ResponseEntity<Product> post(@Valid @RequestBody Product product){
-
-        return ResponseEntity.status(HttpStatus.CREATED).body(productRepository.save(product));
+        if(userRepository.existsById(product.getUser().getId())){
+            if (categoryRepository.existsById(product.getCategory().getId())) {
+                return ResponseEntity.status(HttpStatus.CREATED).body(productRepository.save(product));
+            }
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Category not found!!");
+        }
+        throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Ueer not found!!");
     }
 
     @PutMapping
     public ResponseEntity<Product> put(@Valid @RequestBody Product product){
-
-        return productRepository.findById(product.getId())
+        if (productRepository.existsById(product.getId())) {
+            return productRepository.findById(product.getId())
                 .map(resposta -> ResponseEntity.ok(productRepository.save(product)))
                 .orElse(ResponseEntity.status(HttpStatus.NOT_FOUND).build());
+        }
+        throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Product not found!!");
     }
 
     @ResponseStatus(HttpStatus.NO_CONTENT)
@@ -71,8 +84,5 @@ public class ProductController {
                 if(product.isEmpty())
                     throw new ResponseStatusException(HttpStatus.NOT_FOUND);
                 productRepository.deleteById(id);
-
     }
-
-
 }

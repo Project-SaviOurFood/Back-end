@@ -28,18 +28,18 @@ public class Category {
 	@NotBlank(message = "the attribute description is mandatory")
 	private String description;
 
-//	@OneToMany(fetch = FetchType.LAZY, mappedBy = "category", cascade = CascadeType.REMOVE)
-//	@JsonIgnoreProperties("category")
-//	private List <Product> product;
-//	
-//	
-//	public List<Product> getProduct() {
-//		return product;
-//	}
-//
-//	public void setProduct(List<Product> product) {
-//		this.product = product;
-//	}
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "category", cascade = CascadeType.REMOVE)
+	@JsonIgnoreProperties("category")
+	private List<Product> product;
+
+
+	public List<Product> getProduct() {
+		return product;
+	}
+
+	public void setProduct(List<Product> product) {
+		this.product = product;
+	}
 
 	public Long getId() {
 		return id;
