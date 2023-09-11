@@ -1,7 +1,7 @@
 
 # 🚧 EM CONSTRUÇÃO 🚧
 
-# Sav<i>Our Food
+# SaviOur Food
 O SaviOurFood é um projeto desenvolvido como parte do curso da Generation Brasil, que tem como objetivo promover a sustentabilidade alimentar, facilitando a redistribuição eficiente de alimentos excedentes para aqueles que precisam. O projeto permite que doadores listem os itens que desejam doar e permite que destinatários adicionem itens ao carrinho para coleta futura.
 
 ## Visão Geral
