@@ -14,24 +14,26 @@ public class Product {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @NotBlank(message = "O atributo nome é obrigatório")
+    @NotBlank(message = "The attribute name is mandatory")
     private String name;
 
-    @NotNull(message = "O atributo valor é obrigatório")
+    @NotNull(message = "The attribute value is mandatory")
     private Float value;
 
-    @NotNull(message = "O atributo data é obrigatório")
+    @NotNull(message = "The attribute date is mandatory")
     private Date expirationDate;
 
     private String picture;
 
-    @ManyToOne
-    @JsonIgnoreProperties("Product")
-    private Category category;
-
-    @ManyToOne
-    @JsonIgnoreProperties("Product")
-    private User user;
+	/*
+	 * @ManyToOne
+	 * 
+	 * @JsonIgnoreProperties("Product") private Category category;
+	 * 
+	 * @ManyToOne
+	 * 
+	 * @JsonIgnoreProperties("Product") private User user;
+	 */
 
     public Long getId() {
         return id;
@@ -73,19 +75,13 @@ public class Product {
         this.picture = picture;
     }
 
-    public Category getCategory() {
-        return category;
-    }
-
-    public void setCategory(Category category) {
-        this.category = category;
-    }
-
-    public User getUser() {
-        return user;
-    }
-
-    public void setUser(User user) {
-        this.user = user;
-    }
+	/*
+	 * public Category getCategory() { return category; }
+	 * 
+	 * public void setCategory(Category category) { this.category = category; }
+	 * 
+	 * public User getUser() { return user; }
+	 * 
+	 * public void setUser(User user) { this.user = user; }
+	 */
 }
