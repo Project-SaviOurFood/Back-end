@@ -28,7 +28,7 @@ public class User {
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "user", cascade = CascadeType.REMOVE)
 	@JsonIgnoreProperties("user")
-	private List<Product> product;
+	private List<Product> products;
 
 
 	private String picture;
@@ -38,11 +38,11 @@ public class User {
 	}
 
 	public List<Product> getProduct() {
-		return product;
+		return products;
 	}
 
 	public void setProduct(List<Product> product) {
-		this.product = product;
+		this.products = product;
 	}
 
 	public void setId(Long id) {
