@@ -26,10 +26,10 @@ public class Product {
   private String picture;
 
   @ManyToOne
-  @JsonIgnoreProperties("Product")
+  @JsonIgnoreProperties("product")
   private Category category;
   @ManyToOne
-  @JsonIgnoreProperties("Product")
+  @JsonIgnoreProperties("product")
   private User user;
 
   public Long getId() {

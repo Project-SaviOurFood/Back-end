@@ -2,6 +2,7 @@ package com.generation.SaviOurFood.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
 
@@ -14,16 +15,17 @@ public class User {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
-	@NotBlank(message = "")
-	@Size(min = 5, max = 255, message = "")
+	@NotBlank(message = "The name attribute is mandatory!")
+	@Size(min = 5, max = 255)
 	private String name;
 
-	@NotBlank(message = "")
-	@Size(min = 5, max = 255, message = "")
+	@NotBlank(message = "The email attribute is mandatory!")
+	@Size(min = 5, max = 255)
+	@Email
 	private String email;
 
-	@NotBlank(message = "")
-	@Size(min = 5, max = 255, message = "")
+	@NotBlank(message = "The password attribute is mandatory")
+	@Size(min = 5, max = 255)
 	private String password;
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "user", cascade = CascadeType.REMOVE)

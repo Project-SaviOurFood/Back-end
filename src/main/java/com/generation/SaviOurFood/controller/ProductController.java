@@ -35,7 +35,7 @@ public class ProductController {
     @Autowired
     private CategoryRepository categoryRepository;
 
-    @GetMapping("/all")
+    @GetMapping
     public ResponseEntity<List<Product>> getAll(){
 
         return ResponseEntity.ok(productRepository.findAll());
@@ -50,7 +50,7 @@ public class ProductController {
 
     }
 
-    @GetMapping("/{name}")
+    @GetMapping("/name/{name}")
     public ResponseEntity<List<Product>> getByAllName(@PathVariable String name){
 
         return ResponseEntity.ok(productRepository.findAllByNameContainingIgnoreCase(name));

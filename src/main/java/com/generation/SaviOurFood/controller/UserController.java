@@ -1,18 +1,19 @@
 package com.generation.SaviOurFood.controller;
 
 import java.util.List;
+import java.util.Optional;
 
+import com.generation.SaviOurFood.model.UserLogin;
+import com.generation.SaviOurFood.service.UserService;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import com.generation.SaviOurFood.model.User;
 import com.generation.SaviOurFood.repository.UserRepository;
+import org.springframework.web.server.ResponseStatusException;
 
 @RestController
 @RequestMapping("/user")
@@ -21,7 +22,11 @@ public class UserController {
 	@Autowired
 	private UserRepository userRepository;
 
-	@GetMapping("/all")
+	@Autowired
+	private UserService userService;
+
+
+	@GetMapping
 	public ResponseEntity<List<User>> getAll() {
 		return ResponseEntity.ok(userRepository.findAll());
 
@@ -39,7 +44,43 @@ public class UserController {
 		return ResponseEntity.ok(userRepository.findAllByNameContainingIgnoreCase(name));
 
 	}
-	
+
+	@PostMapping("/login")
+	public ResponseEntity<UserLogin> login(@Valid @RequestBody Optional<UserLogin> userLogin) {
+
+		return userService.authenticationUser(userLogin)
+				.map(response -> ResponseEntity.status(HttpStatus.OK).body(response))
+				.orElse(ResponseEntity.status(HttpStatus.UNAUTHORIZED).build());
+
+	}
+
+	@PostMapping("/register")
+	public ResponseEntity<User> register(@Valid @RequestBody User user) {
+
+		return userService.registerUser(user)
+				.map(response -> ResponseEntity.status(HttpStatus.CREATED).body(response))
+				.orElse(ResponseEntity.status(HttpStatus.BAD_REQUEST).build());
+
+	}
+
+	@PutMapping
+	public ResponseEntity<User> update(@Valid @RequestBody User user) {
+		return userService.updateUser(user)
+				.map(response -> ResponseEntity.status(HttpStatus.OK).body(response))
+				.orElse(ResponseEntity.status(HttpStatus.NOT_FOUND).build());
+
+	}
+
+	@ResponseStatus(HttpStatus.NO_CONTENT)
+	@DeleteMapping("/{id}")
+	public void delete(@PathVariable Long id) {
+		Optional<User> user = userRepository.findById(id);
+		if (user.isEmpty())
+			throw new ResponseStatusException(HttpStatus.NOT_FOUND);
+		userRepository.deleteById(id);
+	}
+}
+
 	/*@PostMapping
 	public ResponseEntity<User>post(@Valid @RequestBody User user){
 		if (userRepository.existsById(user.getTema().getId()))
@@ -47,6 +88,7 @@ public class UserController {
 					.body(userRepository.save(user));
 
     } */
+
     /*  @PutMapping
       public ResponseEntity<User>put(@Valid @RequestBody User user){
     	  if (userRepository.existsById(user.getId())) {
@@ -58,16 +100,4 @@ public class UserController {
     	  return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
 
      }*/
-     
-     /*
-     @ResponseStatus(HttpStatus.NO_CONTENT)
-     @DeleteMapping("/{id}")
-     public void delete (@PathVariable Long id) {
-    	 Optional<User>user=userRepository.findById(id);
-    	 if(user.isEmpty())
-    		 throw new ResponseStatusException(HttpStaus.NOT_FOUND);
-    	 userRepository.deleteAllById(id);
-    	 */
-     
 
-}
