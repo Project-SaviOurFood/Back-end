@@ -2,6 +2,7 @@ package com.generation.SaviOurFood.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
 
@@ -14,21 +15,22 @@ public class User {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
-	@NotBlank(message = "")
-	@Size(min = 5, max = 255, message = "")
+	@NotBlank(message = "The name attribute is mandatory!")
+	@Size(min = 5, max = 255)
 	private String name;
 
-	@NotBlank(message = "")
-	@Size(min = 5, max = 255, message = "")
+	@NotBlank(message = "The email attribute is mandatory!")
+	@Size(min = 5, max = 255)
+	@Email
 	private String email;
 
-	@NotBlank(message = "")
-	@Size(min = 5, max = 255, message = "")
+	@NotBlank(message = "The password attribute is mandatory")
+	@Size(min = 5, max = 255)
 	private String password;
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "user", cascade = CascadeType.REMOVE)
 	@JsonIgnoreProperties("user")
-	private List<Product> products;
+	private List<Product> product;
 
 
 	private String picture;
@@ -38,11 +40,11 @@ public class User {
 	}
 
 	public List<Product> getProduct() {
-		return products;
+		return product;
 	}
 
 	public void setProduct(List<Product> product) {
-		this.products = product;
+		this.product = product;
 	}
 
 	public void setId(Long id) {

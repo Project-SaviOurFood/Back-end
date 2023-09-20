@@ -21,7 +21,7 @@ public class Product {
   private Float value;
 
   @NotNull(message = "The attribute date is mandatory")
-  private String expirationDate;
+  private Date expirationDate;
 
   private String picture;
 
@@ -56,11 +56,11 @@ public class Product {
     this.value = value;
   }
 
-  public String getExpirationDate() {
+  public Date getExpirationDate() {
     return expirationDate;
   }
 
-  public void setExpirationDate(String expirationDate) {
+  public void setExpirationDate(Date expirationDate) {
     this.expirationDate = expirationDate;
   }
 
