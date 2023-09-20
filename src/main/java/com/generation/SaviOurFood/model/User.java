@@ -1,6 +1,7 @@
 package com.generation.SaviOurFood.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
@@ -19,6 +20,7 @@ public class User {
 	@Size(min = 5, max = 255)
 	private String name;
 
+	@Schema(example = "email@email.com.br")
 	@NotBlank(message = "The email attribute is mandatory!")
 	@Size(min = 5, max = 255)
 	@Email
@@ -34,6 +36,17 @@ public class User {
 
 
 	private String picture;
+
+	public User(Long id, String name, String email, String password, List<Product> product, String picture) {
+		this.id = id;
+		this.name = name;
+		this.email = email;
+		this.password = password;
+		this.product = product;
+		this.picture = picture;
+	}
+
+	public User (){}
 
 	public Long getId() {
 		return id;
