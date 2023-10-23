@@ -1,12 +1,7 @@
 
-# 🚧 EM CONSTRUÇÃO 🚧
+## ⚙️ Back-end (Projeto SaviOurFood)
 
-# SaviOur Food
-O SaviOurFood é um projeto desenvolvido como parte do curso da Generation Brasil, que tem como objetivo promover a sustentabilidade alimentar, facilitando a redistribuição eficiente de alimentos excedentes para aqueles que precisam. O projeto permite que doadores listem os itens que desejam doar e permite que destinatários adicionem itens ao carrinho para coleta futura.
-
-## Visão Geral
-
-Este é um projeto de API REST que oferece funcionalidades para gerenciar transações financeiras e categorias relacionadas. Ele permite que os usuários se cadastrem, façam login e realizem operações como adicionar, listar, atualizar e excluir transações financeiras, bem como listar categorias e obter um extrato financeiro.
+Este é um projeto de API REST que oferece funcionalidades para gerenciar transações de compra e venda de produtos. Ele permite que os usuários se cadastrem, façam login e realizem operações como adicionar, listar, atualizar e excluir transações financeiras, bem como listar categorias e obter um extrato financeiro.
 
 ## Recursos 
 - Listagem de todos os produtos disponíveis.
@@ -31,9 +26,12 @@ Este é um projeto de API REST que oferece funcionalidades para gerenciar transa
 ##  Tecnologias Utilizadas
 - Java 17
 - Spring Boot
+- Spring Security
+- JPA
+- Docker
 - MySQL
 - Maven
-
+  
 ## Como Usar
 #### Instalação
 1. Clone o repositório:
